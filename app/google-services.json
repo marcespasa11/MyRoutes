@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1061034447123",
+    "project_id": "myroutes-ec604",
+    "storage_bucket": "myroutes-ec604.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061034447123:android:c5cd2586e0ec85bf0ccae6",
+        "android_client_info": {
+          "package_name": "com.maresgon.myroutes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061034447123-n6ebmaml2vkdq8iik29dqa56hh42mmsr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5sAk0WxJH38krYGCihRpdg1otJuNl9Ks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061034447123-n6ebmaml2vkdq8iik29dqa56hh42mmsr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
