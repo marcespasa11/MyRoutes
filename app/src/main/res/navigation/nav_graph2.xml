@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph2"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/LoginFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/LoginFragment"
         android:name="com.maresgon.myroutes.Fragments.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first"/>
