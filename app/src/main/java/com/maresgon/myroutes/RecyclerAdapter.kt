@@ -43,7 +43,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         init {
             itemImage = itemView.findViewById(R.id.item_image)
             itemTitle = itemView.findViewById(R.id.item_title)
-            itemLocation = itemView.findViewById(R.id.item_description)
+            itemLocation = itemView.findViewById(R.id.item_location)
             itemDescription = itemView.findViewById(R.id.item_description)
         }
     }
