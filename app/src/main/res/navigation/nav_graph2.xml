@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph2"
-    app:startDestination="@id/LoginFragment">
+    app:startDestination="@id/LoggedFragment">
 
     <fragment
-        android:id="@+id/LoginFragment"
-        android:name="com.maresgon.myroutes.Fragments.FirstFragment"
+        android:id="@+id/LoggedFragment"
+        android:name="com.maresgon.myroutes.Fragments.LoggedFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first"/>
+        tools:layout="@layout/fragment_logged"/>
+    <fragment
+        android:id="@+id/PublishFragment"
+        android:name="com.maresgon.myroutes.Fragments.PublishFragment"
+        android:label="fragment_publish"
+        tools:layout="@layout/fragment_publish" />
 </navigation>

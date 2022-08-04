@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
@@ -109,7 +108,7 @@ class RegisterFragment : Fragment() {
                 val usersRef = rootRef.collection("users")
                 usersRef.document(emailText).set(userBD)
 
-                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+                findNavController().navigate(R.id.action_RegisterFragment_to_LoginFragment)
                 //Change fragment to login
                 /*val context = activity as AppCompatActivity
                 val fragmentManager = context.supportFragmentManager

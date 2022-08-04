@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
         val email: EditText = v.findViewById(R.id.email_field)
         val password: EditText = v.findViewById(R.id.password_field)
 
-        // Replace fragment
+        // Replace activity
         logButton.setOnClickListener {
             val txt_email: String = email.text.toString()
             val txt_password: String = password.text.toString()
@@ -66,7 +66,7 @@ class LoginFragment : Fragment() {
 
         // Replace fragment
         regButton.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_LoginFragment_to_RegisterFragment)
             /*val fragmentManager = context.supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
             transaction.replace(R.id.main_activity,RegisterFragment())
