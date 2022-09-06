@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -29,7 +31,14 @@ class LoggedActivity : AppCompatActivity() {
         val secondFragment= PublishFragment()
         //val thirdFragment=ProfileFragment()
 
+        //Crec que no funciona perquè flFragment no és un NavHostFragment
+
+        /*val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.flFragment) as NavHostFragment
+        val navController = navHostFragment.navController*/
+
         setCurrentFragment(firstFragment)
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
@@ -40,15 +49,26 @@ class LoggedActivity : AppCompatActivity() {
             }
             true
         }
+
+        /*val navigationHost =
+            supportFragmentManager.findFragmentById(R.id.nav_graph2) as NavHostFragment
+        val navController = navigationHost.navController*/
+
+        //StackOverflow? Error al camviar de PublishFragment a LoggedFragment
+
+        //val navController = NavHostFragment.findNavController(R.id.fragmentLogged)
+
+        //val navController = Navigation.findNavController(LoggedActivity, R.id.nav_graph2)
+
         /*binding = ActivityLoggedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)*/
 
         //Crec que te a vore amb el navigation (jetpack)
-        /*val navController = findNavController(R.id.nav_host_fragment_content_logged)
-        appBarConfiguration = AppBarConfiguration(navController.graph)*/
-        //setupActionBarWithNavController(navController, appBarConfiguration)
+        /*val navController = findNavController(R.id.nav_graph2)
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)*/
 
         /*binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

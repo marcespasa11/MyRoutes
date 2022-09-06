@@ -14,5 +14,9 @@
         android:id="@+id/PublishFragment"
         android:name="com.maresgon.myroutes.Fragments.PublishFragment"
         android:label="fragment_publish"
-        tools:layout="@layout/fragment_publish" />
+        tools:layout="@layout/fragment_publish" >
+        <action
+            android:id="@+id/action_PublishFragment_to_LoggedFragment"
+            app:destination="@id/LoggedFragment" />
+    </fragment>
 </navigation>

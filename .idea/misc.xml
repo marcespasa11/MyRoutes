@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.4925" />
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/drawable/ic_home_background.xml" value="0.4095" />
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/drawable/ic_home_foreground.xml" value="0.4095" />
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/drawable/ic_profile_background.xml" value="0.4095" />
+        <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/drawable/ic_profile_foreground.xml" value="0.4925" />
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/drawable/ic_upload_background.xml" value="0.4095" />
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/drawable/ic_upload_foreground.xml" value="0.4095" />
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/layout/activity_logged.xml" value="0.36666666666666664" />
@@ -15,6 +17,8 @@
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/layout/content_logged.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/layout/fragment_first.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/layout/fragment_item.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/layout/fragment_item_list.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/layout/fragment_logged.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Marc/Desktop/TFG/app/src/main/res/layout/fragment_publish.xml" value="0.36666666666666664" />
