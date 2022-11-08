@@ -14,6 +14,7 @@ import com.maresgon.myroutes.Classes.Post
 import com.maresgon.myroutes.R
 import com.maresgon.myroutes.RecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.gms.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.fragment_logged.*
 
 /**
