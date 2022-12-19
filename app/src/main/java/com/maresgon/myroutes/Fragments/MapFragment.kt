@@ -1,6 +1,7 @@
 package com.maresgon.myroutes.Fragments
 
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,27 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.maresgon.myroutes.R
+
+import com.google.android.gms.maps.MapsInitializer
+import com.google.android.gms.maps.MapsInitializer.Renderer
+import com.google.android.gms.maps.OnMapsSdkInitializedCallback
+import com.google.android.gms.maps.model.PolylineOptions
+
+internal class MapRendererOptInApplication : Application(), OnMapsSdkInitializedCallback {
+    override fun onCreate() {
+        super.onCreate()
+        MapsInitializer.initialize(applicationContext, Renderer.LATEST, this)
+    }
+
+    override fun onMapsSdkInitialized(renderer: MapsInitializer.Renderer) {
+        when (renderer) {
+            Renderer.LATEST -> Log.d("MapsDemo", "The latest version of the renderer is used.")
+            Renderer.LEGACY -> Log.d("MapsDemo", "The legacy version of the renderer is used.")
+        }
+    }
+}
+
+
 
 
 class MapFragment : Fragment(), OnMapReadyCallback {
@@ -44,8 +66,24 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 .position(ETSInf)
                 .title("ETSInf")
         )
+        /**Dibuixar linies**/
+        var rutePoints : ArrayList<LatLng> = ArrayList<LatLng>()
+
+        rutePoints.add(LatLng(39.482708,-0.351380))
+        rutePoints.add(LatLng(39.481234,-0.349666))
+        rutePoints.add(LatLng(39.478652,-0.346002))
+
+        val polylineOptions = PolylineOptions()
+            .addAll(rutePoints)
+            .geodesic(true)
+        googleMap.addPolyline(polylineOptions)
+
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(ETSInf))
-        //googleMap.setOnMapClickListener(OnMapClickListener)
+
+        /**Gestionar clicks**/
+        googleMap.setOnMapClickListener{ point ->
+            googleMap.addMarker(MarkerOptions().position(point))
+        }
     }
     /**Gestionar clicks**/
     /*
