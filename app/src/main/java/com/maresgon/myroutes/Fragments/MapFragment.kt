@@ -22,6 +22,13 @@ import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.MapsInitializer.Renderer
 import com.google.android.gms.maps.OnMapsSdkInitializedCallback
 import com.google.android.gms.maps.model.PolylineOptions
+import com.maresgon.myroutes.Api_Interface.DirectionsApiService
+import com.maresgon.myroutes.Api_Interface.DirectionsResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 internal class MapRendererOptInApplication : Application(), OnMapsSdkInitializedCallback {
     override fun onCreate() {
@@ -85,11 +92,28 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             googleMap.addMarker(MarkerOptions().position(point))
         }
     }
-    /**Gestionar clicks**/
-    /*
-    fun OnMapClickListener(point: LatLng) {
-        tapTextView.text = "tapped, point=$point"
-    }
-     */
+    val retrofit = Retrofit.Builder()
+        .baseUrl("https://maps.googleapis.com/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
+    val apiService = retrofit.create(DirectionsApiService::class.java)
+
+/*
+    val call = apiService.getDirections("Seattle", "San Francisco", "YOUR_API_KEY")
+    call.enqueue(object : Callback<DirectionsResponse> {
+        override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
+            if (response.isSuccessful) {
+                val directions = response.body()
+                // procesar las direcciones aquí
+            } else {
+                // manejar el error aquí
+            }
+        }
+
+        override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
+            // manejar el error aquí
+        }
+    })
+*/
 }
