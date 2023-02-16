@@ -15,4 +15,14 @@
         map:cameraTilt="30"
         map:cameraZoom="17"
         />
+    <Button
+        android:id="@+id/drawRouteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/CalculateRoot"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        />
+
 </RelativeLayout>
