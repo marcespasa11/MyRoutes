@@ -19,7 +19,7 @@ class LoggedActivity : AppCompatActivity() {
         setContentView(R.layout.activity_logged)
 
         val firstFragment = LoggedFragment()
-        val secondFragment = PublishFragment()
+        val secondFragment = MapFragment()
         val thirdFragment = MapFragment()
         //val thirdFragment=ProfileFragment()
 
