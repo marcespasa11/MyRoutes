@@ -82,7 +82,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         addInfoButton?.setOnClickListener {
             val fragment = PublishFragment()
             val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.map, fragment)
+            transaction?.replace(R.id.flFragment, fragment)
             transaction?.addToBackStack(null)
             transaction?.commit()
         }
