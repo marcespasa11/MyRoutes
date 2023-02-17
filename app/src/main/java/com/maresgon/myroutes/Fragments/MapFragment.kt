@@ -78,6 +78,15 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        val addInfoButton: Button? = v.findViewById(R.id.button_addInfo)
+        addInfoButton?.setOnClickListener {
+            val fragment = PublishFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.map, fragment)
+            transaction?.addToBackStack(null)
+            transaction?.commit()
+        }
+
         return v
     }
 
@@ -111,7 +120,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
 
         /**Crida API Directions**/
-        drawRouteButton?.setOnClickListener {
+        button_drawRoute?.setOnClickListener {
             println("Botó pulsat")
             drawRoute(rutePoints, googleMap)
         }
