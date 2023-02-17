@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -30,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.maresgon.myroutes.Activities.LoggedActivity
+import com.maresgon.myroutes.Activities.SharedViewModel
 import com.maresgon.myroutes.Api_Interface.DirectionsApiService
 import com.maresgon.myroutes.Api_Interface.DirectionsResponse
 import com.maresgon.myroutes.BuildConfig.MAPS_API_KEY
@@ -58,6 +60,10 @@ internal class MapRendererOptInApplication : Application(), OnMapsSdkInitialized
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
+    val sharedViewModel: SharedViewModel by activityViewModels()
+
+    val routePost: Post = Post()
+
     val retrofit = Retrofit.Builder()
         .baseUrl("https://maps.googleapis.com/")
         .addConverterFactory(GsonConverterFactory.create())
@@ -85,6 +91,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             transaction?.replace(R.id.flFragment, fragment)
             transaction?.addToBackStack(null)
             transaction?.commit()
+            sharedViewModel.selectedPlace.value = routePost
         }
 
         return v

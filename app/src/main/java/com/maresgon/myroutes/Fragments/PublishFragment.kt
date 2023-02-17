@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.navigation.Navigation
@@ -20,6 +21,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.maresgon.myroutes.Activities.LoggedActivity
+import com.maresgon.myroutes.Activities.SharedViewModel
 import com.maresgon.myroutes.Classes.Post
 import com.maresgon.myroutes.R
 import kotlinx.android.synthetic.main.fragment_publish.*
@@ -27,6 +29,7 @@ import kotlinx.android.synthetic.main.fragment_publish.*
 
 class PublishFragment : Fragment() {
 
+    val sharedViewModel: SharedViewModel by activityViewModels()
     val db =  Firebase.firestore
     var newpost:Post = Post()
 
@@ -39,6 +42,13 @@ class PublishFragment : Fragment() {
         val v: View = inflater.inflate(R.layout.fragment_publish, container, false)
 
         val publish_button: TextView = v.findViewById(R.id.button_publish)
+
+        sharedViewModel.selectedPlace.observe(
+            viewLifecycleOwner,
+            { routePost ->
+                // Mostrar en el layout los datos pasados por el post
+            },
+        )
 
         publish_button.setOnClickListener {
 
