@@ -63,6 +63,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     val sharedViewModel: SharedViewModel by activityViewModels()
 
     val routePost: Post = Post()
+    /**Linea de punts a firebase**///val myRouteLine = hashMapOf<Int, List<LatLng>>()
+    /**Linea de punts a firebase**///val routeLine = hashMapOf<String, List<LatLng>>()
+    var totalDistance: Double = 0.0
+    var totalDuration: Double = 0.0
+
 
     val retrofit = Retrofit.Builder()
         .baseUrl("https://maps.googleapis.com/")
@@ -91,6 +96,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             transaction?.replace(R.id.flFragment, fragment)
             transaction?.addToBackStack(null)
             transaction?.commit()
+            routePost.distance = totalDistance.toString()
+            routePost.duration = totalDuration
+            /**Linea de punts a firebase**///routeLine.putAll(myRouteLine.mapKeys { it.key.toString() })
+            /**Linea de punts a firebase**///routePost.routeLine = this.routeLine
             sharedViewModel.selectedPlace.value = routePost
         }
 
@@ -98,23 +107,18 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+
         var ETSInf = LatLng(39.4822022, -0.3482144)
+        /*
         googleMap.addMarker(
             MarkerOptions()
                 .position(ETSInf)
                 .title("ETSInf")
         )
+         */
+
         /**Dibuixar linies**/
         var rutePoints : ArrayList<LatLng> = ArrayList<LatLng>()
-/*
-        rutePoints.add(LatLng(39.482708,-0.351380))
-        rutePoints.add(LatLng(39.481234,-0.349666))
-        rutePoints.add(LatLng(39.478652,-0.346002))
-
-        val polylineOptions = PolylineOptions()
-            .addAll(rutePoints)
-            .geodesic(true)
-        googleMap.addPolyline(polylineOptions)*/
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(ETSInf))
 
@@ -130,24 +134,32 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         button_drawRoute?.setOnClickListener {
             println("Botó pulsat")
             drawRoute(rutePoints, googleMap)
+            println("Total distance: $totalDistance meters")
+            println("Total duration: $totalDuration seconds")
         }
 
 
     }
 
     fun drawRoute(rutePoints: ArrayList<LatLng>, googleMap: GoogleMap) {
-        for (i in 0 until rutePoints.size - 1) {
-            val origin = "${rutePoints[i].latitude},${rutePoints[i].longitude}"
-            val destination = "${rutePoints[i + 1].latitude},${rutePoints[i + 1].longitude}"
+        val origin = "${rutePoints.first().latitude},${rutePoints.first().longitude}"
+        val destination = "${rutePoints.last().latitude},${rutePoints.last().longitude}"
+        val waypoints = rutePoints.subList(1, rutePoints.size - 1).joinToString("|") { "${it.latitude},${it.longitude}" }
 
-            apiService.getDirections(origin, destination, "walking", MAPS_API_KEY).enqueue(object : Callback<DirectionsResponse> {
-                override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
-                    if (response.isSuccessful) {
-                        val points = response.body()?.routes?.firstOrNull()?.legs?.firstOrNull()?.steps
+        apiService.getDirections(origin, destination, waypoints,"walking", MAPS_API_KEY, ).enqueue(object : Callback<DirectionsResponse> {
+            override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
+                if (response.isSuccessful) {
+                    /**Linea de punts a firebase**/// var lineCounter = 0
+                    for (leg in response.body()?.routes?.firstOrNull()?.legs ?: emptyList()) {
+                        val points = leg.steps
                             ?.flatMap { PolyUtil.decode(it.polyline?.points) }
                             ?.ifEmpty { null }
                             ?: emptyList()
 
+                        totalDistance += leg.distance?.value!!.toDouble()
+                        totalDuration += leg.duration?.value!!.toDouble()
+
+                        /**Linea de punts a firebase**///myRouteLine[lineCounter] = points //añade los puntos a routeLine
 
                         val lineOptions = PolylineOptions()
                             .color(Color.RED)
@@ -159,15 +171,16 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         }
 
                         googleMap.addPolyline(lineOptions)
-                    } else {
-                        // manejar error
+                        /**Linea de punts a firebase**///lineCounter++
                     }
-                }
-
-                override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
+                } else {
                     // manejar error
                 }
-            })
-        }
+            }
+
+            override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
+                // manejar error
+            }
+        })
     }
 }

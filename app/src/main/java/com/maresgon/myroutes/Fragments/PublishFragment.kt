@@ -46,7 +46,11 @@ class PublishFragment : Fragment() {
         sharedViewModel.selectedPlace.observe(
             viewLifecycleOwner,
             { routePost ->
-                // Mostrar en el layout los datos pasados por el post
+                newpost.distance = routePost.distance
+                newpost.duration = routePost.duration
+                /**Linea de punts a firebase**///newpost.routeLine = routePost.routeLine
+                //newpost.response = routePost.response
+            // Mostrar en el layout los datos pasados por el post
             },
         )
 
@@ -54,9 +58,9 @@ class PublishFragment : Fragment() {
 
             //newpost.id =
             newpost.name = item_titlePost.text.toString().trim()
-            newpost.distance = item_distance.text.toString().trim()
+            //newpost.distance = item_distance.text.toString().trim()
             newpost.difficulty = item_difficulty.text.toString().trim()
-            newpost.duration = item_duration.text.toString().toInt()//.text.toString().trim()
+            //newpost.duration = item_duration.text.toString().toDouble()//.text.toString().trim()
             newpost.description = item_descPost.text.toString().trim()
             newpost.location = item_loc.text.toString()
 
