@@ -112,6 +112,16 @@
             app:layout_constraintTop_toBottomOf="@+id/item_distance"
             tools:text="Running" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="52dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_kindOfActivity"
+            app:layout_constraintTop_toBottomOf="@+id/item_distance"
+            app:srcCompat="@drawable/walking" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

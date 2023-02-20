@@ -63,6 +63,12 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
             "Hard" -> holder.itemView.setBackgroundColor((Color.parseColor("#FFC0CB")))//"#ff94ff")))
         }
 
+        when(model.kindOfActivity) {
+            "Walking" -> holder.itemImageActivity.setImageResource(R.drawable.walking)
+            "Running" -> holder.itemImageActivity.setImageResource(R.drawable.running)
+            "Cycling" -> holder.itemImageActivity.setImageResource(R.drawable.cycling)
+        }
+
         //foto
         var path = model.path
         if (path == "")
@@ -131,6 +137,7 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
         var itemDistance = itemView.item_distance
         var itemDifficulty = itemView.item_difficulty
         var itemKindOfActivity = itemView.item_kindOfActivity
+        var itemImageActivity = itemView.imageView
         /**Image**///var itemImage = itemView.item_image
 
         //var checkBoxFavourite = itemView.checkBox_Favourite   //Future implementation
