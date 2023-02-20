@@ -135,8 +135,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         val origin = "${rutePoints.first().latitude},${rutePoints.first().longitude}"
         val destination = "${rutePoints.last().latitude},${rutePoints.last().longitude}"
         val waypoints = rutePoints.subList(1, rutePoints.size - 1).joinToString("|") { "${it.latitude},${it.longitude}" }
+        val optimizedWaypoints = "optimize:true|$waypoints"
 
-        apiService.getDirections(origin, destination, waypoints,"walking", MAPS_API_KEY, ).enqueue(object : Callback<DirectionsResponse> {
+        apiService.getDirections(origin, destination, optimizedWaypoints,"walking", MAPS_API_KEY, ).enqueue(object : Callback<DirectionsResponse> {
             override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
                 if (response.isSuccessful) {
                     /**Linea de punts a firebase**/// var lineCounter = 0
