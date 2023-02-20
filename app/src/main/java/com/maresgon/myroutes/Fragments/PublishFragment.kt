@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.navigation.Navigation
@@ -20,13 +21,17 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.maresgon.myroutes.Activities.LoggedActivity
+import com.maresgon.myroutes.Activities.SharedViewModel
 import com.maresgon.myroutes.Classes.Post
 import com.maresgon.myroutes.R
 import kotlinx.android.synthetic.main.fragment_publish.*
+import java.text.DecimalFormat
 
 
 class PublishFragment : Fragment() {
 
+    val decimalFormat = DecimalFormat("#.##")
+    val sharedViewModel: SharedViewModel by activityViewModels()
     val db =  Firebase.firestore
     var newpost:Post = Post()
 
@@ -40,13 +45,30 @@ class PublishFragment : Fragment() {
 
         val publish_button: TextView = v.findViewById(R.id.button_publish)
 
+        sharedViewModel.selectedPlace.observe(
+            viewLifecycleOwner,
+        ) { routePost ->
+            val distanceInMeters = routePost.distance
+            val durationInSeconds = routePost.duration
+
+            // Convertimos la distancia a kilómetros y la duración a horas
+            val distanceInKilometers = decimalFormat.format(distanceInMeters!!.toDouble() / 1000)
+            val durationInHours = decimalFormat.format(durationInSeconds!!.toDouble() / 3600)
+
+
+            // Actualizamos los valores de la nueva publicación
+            newpost.distance = "$distanceInKilometers km"
+            newpost.duration = "$durationInHours h"
+            v.findViewById<TextView>(R.id.item_distance).text = newpost.distance.toString()
+            v.findViewById<TextView>(R.id.item_duration).text = newpost.duration.toString()
+            /**Linea de punts a firebase**///newpost.routeLine = routePost.routeLine
+        }
+
         publish_button.setOnClickListener {
 
             //newpost.id =
             newpost.name = item_titlePost.text.toString().trim()
-            newpost.distance = item_distance.text.toString().trim()
             newpost.difficulty = item_difficulty.text.toString().trim()
-            newpost.duration = item_duration.text.toString().toInt()//.text.toString().trim()
             newpost.description = item_descPost.text.toString().trim()
             newpost.location = item_loc.text.toString()
 

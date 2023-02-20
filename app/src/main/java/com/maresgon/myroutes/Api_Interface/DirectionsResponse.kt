@@ -11,10 +11,15 @@ data class DirectionsResponse(
 data class Route(
     val summary: String?,
     val legs: List<Leg>?
-)
+){
+    constructor() : this(null, null)
+}
+
 
 data class Leg(
-    val steps: List<Step>?
+    val steps: List<Step>?,
+    val distance: Distance?,
+    val duration: Duration?,
 
 )
 

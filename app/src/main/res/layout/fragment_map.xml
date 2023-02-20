@@ -16,12 +16,22 @@
         map:cameraZoom="17"
         />
     <Button
-        android:id="@+id/drawRouteButton"
+        android:id="@+id/button_drawRoute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/CalculateRoot"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        />
+    <Button
+        android:id="@+id/button_addInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="20dp"
         />
 
