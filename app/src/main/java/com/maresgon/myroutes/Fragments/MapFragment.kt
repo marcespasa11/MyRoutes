@@ -97,7 +97,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             transaction?.addToBackStack(null)
             transaction?.commit()
             routePost.distance = totalDistance.toString()
-            routePost.duration = totalDuration
+            routePost.duration = totalDuration.toString()
             /**Linea de punts a firebase**///routeLine.putAll(myRouteLine.mapKeys { it.key.toString() })
             /**Linea de punts a firebase**///routePost.routeLine = this.routeLine
             sharedViewModel.selectedPlace.value = routePost

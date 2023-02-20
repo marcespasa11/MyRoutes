@@ -12,7 +12,7 @@ class Post {
     var name:String ?= null
     var distance:String ?= null
     var difficulty:String ?= null
-    var duration:Double ?= null
+    var duration:String ?= null
     var description:String ?= null
     var location:String ?= null
     var kindOfActivity:String ?= null
