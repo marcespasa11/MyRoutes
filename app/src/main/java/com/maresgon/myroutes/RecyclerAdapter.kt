@@ -51,12 +51,16 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
         holder.itemTitle.text = model.name
         holder.itemDescription.text = model.description
         holder.itemLocation.text = model.location //"${model.city}, ${model.country}"
+        holder.itemDistance.text = model.distance
+        holder.itemDuration.text = model.duration
+        holder.itemDifficulty.text = model.difficulty
+        holder.itemKindOfActivity.text = model.kindOfActivity
 
 
-        when(model.kindOfActivity) {
-            "Running" -> holder.itemView.setBackgroundColor((Color.parseColor("#98fb98")))
-            "Walking" -> holder.itemView.setBackgroundColor((Color.parseColor("#ffcb94")))
-            "Cycling" -> holder.itemView.setBackgroundColor((Color.parseColor("#ff94ff")))
+        when(model.difficulty) {
+            "Easy" -> holder.itemView.setBackgroundColor((Color.parseColor("#98fb98")))
+            "Medium" -> holder.itemView.setBackgroundColor((Color.parseColor("#ffcb94")))
+            "Hard" -> holder.itemView.setBackgroundColor((Color.parseColor("#FFC0CB")))//"#ff94ff")))
         }
 
         //foto
@@ -64,12 +68,16 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
         if (path == "")
             path = model.kindOfActivity.toString().lowercase() + ".png"
 
+        /**En cas de insertar image*/
+        /*
         Picasso
             .get()
             .load("https://firebasestorage.googleapis.com/v0/b/shelted-d5576.appspot.com/o/${path}?alt=media&token=f95e312c-97ac-468c-a281-5f0eea32b5a7")
             .resize(1000, 1000)
             .centerCrop()
             .into(holder.itemImage)
+
+         */
 
         holder.itemView.setOnClickListener(object: View.OnClickListener {
             override fun onClick(v: View?) {
@@ -119,7 +127,11 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
         var itemTitle = itemView.item_title
         var itemDescription = itemView.item_description
         var itemLocation = itemView.item_location
-        var itemImage = itemView.item_image
+        var itemDuration = itemView.item_duration
+        var itemDistance = itemView.item_distance
+        var itemDifficulty = itemView.item_difficulty
+        var itemKindOfActivity = itemView.item_kindOfActivity
+        /**Image**///var itemImage = itemView.item_image
 
         //var checkBoxFavourite = itemView.checkBox_Favourite   //Future implementation
     }
