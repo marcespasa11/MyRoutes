@@ -71,6 +71,7 @@ class PublishFragment : Fragment() {
             newpost.difficulty = item_difficulty.text.toString().trim()
             newpost.description = item_descPost.text.toString().trim()
             newpost.location = item_loc.text.toString()
+            newpost.kindOfActivity = item_kindOfAct.selectedItem.toString()
 
 
 

@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.PublishFragment">
 
+    <TextView
+        android:id="@+id/descriptionText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="200dp"
+        android:text="Description:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.389"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_descPost" />
+
     <EditText
         android:id="@+id/item_descPost"
         android:layout_width="wrap_content"
@@ -158,5 +170,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/locationText"
         app:layout_constraintTop_toBottomOf="@+id/item_difficulty" />
+
+    <Spinner
+        android:id="@+id/item_kindOfAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:entries="@array/activityOptions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
