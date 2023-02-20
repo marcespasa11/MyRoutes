@@ -109,13 +109,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
 
         var ETSInf = LatLng(39.4822022, -0.3482144)
-        /*
-        googleMap.addMarker(
-            MarkerOptions()
-                .position(ETSInf)
-                .title("ETSInf")
-        )
-         */
 
         /**Dibuixar linies**/
         var rutePoints : ArrayList<LatLng> = ArrayList<LatLng>()
@@ -132,10 +125,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         /**Crida API Directions**/
         button_drawRoute?.setOnClickListener {
-            println("Botó pulsat")
             drawRoute(rutePoints, googleMap)
-            println("Total distance: $totalDistance meters")
-            println("Total duration: $totalDuration seconds")
         }
 
 
