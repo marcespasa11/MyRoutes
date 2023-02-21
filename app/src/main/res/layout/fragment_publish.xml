@@ -99,13 +99,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/distanceText" />
 
-    <EditText
+    <Spinner
         android:id="@+id/item_difficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:minHeight="48dp"
-        android:text="Medium"
+        android:entries="@array/difficultyOptions"
         app:layout_constraintEnd_toStartOf="@+id/item_duration"
         app:layout_constraintStart_toEndOf="@+id/item_distance"
         app:layout_constraintTop_toBottomOf="@+id/difficultyText" />
@@ -116,7 +116,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
-        android:text="exemple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/titleText"

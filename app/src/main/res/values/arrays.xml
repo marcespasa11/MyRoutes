@@ -5,4 +5,9 @@
         <item>"Running"</item>
         <item>"Cycling"</item>
     </string-array>
+    <string-array name="difficultyOptions">
+        <item>"Hard"</item>
+        <item>"Medium"</item>
+        <item>"Easy"</item>
+    </string-array>
 </resources>
