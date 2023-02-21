@@ -71,9 +71,13 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
 
         if (model.accesibility == true) {
             holder.itemAccesibility.setImageResource(R.drawable.accesibilidad_universal)
-        } else {
+            holder.itemTextAccesibility.setText("Accesible")
+
+        }/* else {
             holder.itemImageActivity.setImageResource(0)
         }
+
+         */
 
         //foto
         var path = model.path
@@ -145,6 +149,7 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
         var itemKindOfActivity = itemView.item_kindOfActivity
         var itemImageActivity = itemView.imageView
         var itemAccesibility = itemView.imageAccesibility
+        var itemTextAccesibility = itemView.item_accesibility
         /**Image**///var itemImage = itemView.item_image
 
         //var checkBoxFavourite = itemView.checkBox_Favourite   //Future implementation
