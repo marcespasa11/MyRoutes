@@ -148,12 +148,12 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintStart_toEndOf="@+id/item_likeButton"
             app:layout_constraintTop_toBottomOf="@+id/difficultyTextItem"
             app:srcCompat="?android:attr/panelBackground" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/item_likeButton"
             android:layout_width="54dp"
             android:layout_height="46dp"
             android:layout_marginStart="10dp"

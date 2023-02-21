@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.FirebaseFirestore
 import com.maresgon.myroutes.Classes.Post
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.card_layout.view.*
@@ -35,6 +36,7 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
 
      */
     lateinit var parent: ViewGroup
+    val db = FirebaseFirestore.getInstance()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostAdapterVH {
         return PostAdapterVH(
@@ -72,12 +74,35 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
         if (model.accesibility == true) {
             holder.itemAccesibility.setImageResource(R.drawable.accesibilidad_universal)
             holder.itemTextAccesibility.setText("Accesible")
-
-        }/* else {
-            holder.itemImageActivity.setImageResource(0)
         }
 
-         */
+        if (model.liked == true) {
+            holder.itemLikeButton.setImageResource(R.drawable.button_like_clicked)
+        }
+
+        holder.itemLikeButton.setOnClickListener {
+            if (model.liked == false) {
+                // Actualiza la apariencia del botón
+                holder.itemLikeButton.setImageResource(R.drawable.button_like_clicked)
+
+                // Guarda la información de "Me gusta" en tu modelo de datos
+                model.liked = true
+
+                // Actualiza el documento correspondiente en la base de datos
+                val documentId = snapshots.getSnapshot(holder.adapterPosition).id
+                db.collection("posts").document(documentId).update("liked", true)
+            } else {
+                // Actualiza la apariencia del botón
+                holder.itemLikeButton.setImageResource(R.drawable.button_disliked)
+
+                // Guarda la información de "Me gusta" en tu modelo de datos
+                model.liked = true
+
+                // Actualiza el documento correspondiente en la base de datos
+                val documentId = snapshots.getSnapshot(holder.adapterPosition).id
+                db.collection("posts").document(documentId).update("liked", false)
+            }
+        }
 
         //foto
         var path = model.path
@@ -150,6 +175,7 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
         var itemImageActivity = itemView.imageView
         var itemAccesibility = itemView.imageAccesibility
         var itemTextAccesibility = itemView.item_accesibility
+        var itemLikeButton = itemView.item_likeButton
         /**Image**///var itemImage = itemView.item_image
 
         //var checkBoxFavourite = itemView.checkBox_Favourite   //Future implementation
