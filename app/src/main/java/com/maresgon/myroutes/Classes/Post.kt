@@ -16,6 +16,7 @@ class Post {
     var description:String ?= null
     var location:String ?= null
     var kindOfActivity:String ?= null
+    var accesibility:Boolean ?= false
     var path: String ?= null
     /**Linea de punts a firebase**///var routeLine: HashMap<String, List<LatLng>>? = null
     var user: String ?= null

@@ -110,7 +110,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_distance"
-            tools:text="Running" />
+            tools:text="Walking" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -121,6 +121,16 @@
             app:layout_constraintStart_toEndOf="@+id/item_kindOfActivity"
             app:layout_constraintTop_toBottomOf="@+id/item_distance"
             app:srcCompat="@drawable/walking" />
+
+        <ImageView
+            android:id="@+id/imageAccesibility"
+            android:layout_width="47dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/item_kindOfActivity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/difficultyTextItem"
+            app:srcCompat="?android:attr/panelBackground" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

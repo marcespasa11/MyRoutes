@@ -72,6 +72,7 @@ class PublishFragment : Fragment() {
             newpost.description = item_descPost.text.toString().trim()
             newpost.location = item_loc.text.toString()
             newpost.kindOfActivity = item_kindOfAct.selectedItem.toString()
+            newpost.accesibility = item_acces.isChecked
 
 
 
