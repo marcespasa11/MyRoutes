@@ -61,7 +61,7 @@ class PublishFragment : Fragment() {
             newpost.duration = "$durationInHours h"
             v.findViewById<TextView>(R.id.item_distance).text = newpost.distance.toString()
             v.findViewById<TextView>(R.id.item_duration).text = newpost.duration.toString()
-            /**Linea de punts a firebase**///newpost.routeLine = routePost.routeLine
+            /**Linea de punts a firebase**/newpost.routeLine = routePost.routeLine.toString()
         }
 
         publish_button.setOnClickListener {

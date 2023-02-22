@@ -26,8 +26,8 @@ data class Leg(
 data class Step(
     val distance: Distance?,
     val duration: Duration?,
-    val endLocation: CustomeLatLng?,
-    val startLocation: CustomeLatLng?,
+    val endLocation: LatLng?,
+    val startLocation: LatLng?,
     val htmlInstructions: String?,
     val travelMode: String?,
     val polyline: Polyline?
@@ -46,7 +46,7 @@ data class Polyline(
     val points: String
 )
 
-data class CustomeLatLng(
+data class LatLng(
     val lat: Double?,
     val lng: Double?
 )

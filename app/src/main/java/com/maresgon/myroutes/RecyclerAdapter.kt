@@ -1,13 +1,7 @@
 package com.maresgon.myroutes
 
-//import com.maresgon.myroutes.R.layout.card_layout
-
-import android.app.Application
-import com.maresgon.myroutes.R.layout.card_layout
-//C:\Users\Marc\Desktop\Uni Wroclaw\TFG\app\src\main\res\layout\card_layout.xml
-//card_layout.view.*
-
 import android.graphics.Color
+import android.graphics.PointF.length
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +13,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.maresgon.myroutes.Classes.Post
 import com.squareup.picasso.Picasso
@@ -27,18 +22,7 @@ import kotlinx.android.synthetic.main.card_layout.view.*
 
 class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
     FirestoreRecyclerAdapter<Post, RecyclerAdapter.PostAdapterVH>(options) {
-// : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-    /*private var titles = arrayOf("Route One", "Route Two", "Route Three", "Route Four", "Route Five", "Route Six", "Route Seven", "Route Eight")
-
-    private var locations = arrayOf("loc 1", "loc 2", "loc 3", "loc 4", "loc 5", "loc 6", "loc 7", "loc 8")
-
-    private var descriptions = arrayOf("desc 1", "desc 2", "desc 3", " desc 4", "desc 5", "desc 6", "desc 7", "desc 8")
-
-    private var images = intArrayOf(R.drawable.ruta4, R.drawable.ruta4, R.drawable.ruta4, R.drawable.ruta4,
-        R.drawable.ruta4, R.drawable.ruta4, R.drawable.ruta4, R.drawable.ruta4)
-
-     */
     lateinit var parent: ViewGroup
     val db = FirebaseFirestore.getInstance()
     private lateinit var googleMap: GoogleMap
@@ -53,6 +37,21 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
                 .inflate(R.layout.card_layout, parent, false)
 
         )
+    }
+
+    fun obtenerPuntosDeLinea(stringDeCoordenadas: String?): List<LatLng> {
+        val puntosDeLinea = mutableListOf<LatLng>()
+
+        val elementosDelMapa = stringDeCoordenadas?.removeSurrounding("{0=[", "]}")?.split(", ")
+        if (elementosDelMapa != null) {
+            for (coordenada in elementosDelMapa) {
+                val (latitud, longitud) = coordenada.split(": ")[1].removeSurrounding("(", ")").split(",")
+                        val punto = LatLng(latitud.toDouble(), longitud.toDouble())
+                        puntosDeLinea.add(punto)
+            }
+        }
+
+        return puntosDeLinea
     }
 
     override fun onBindViewHolder(
@@ -115,30 +114,35 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
             }
         }
 
+        var points = obtenerPuntosDeLinea(model.routeLine)
+
         holder.mapView.onCreate(null)
         holder.mapView.onResume()
         holder.mapView.getMapAsync { googleMap ->
             this.googleMap = googleMap
             val location = ETSInf
-            googleMap.addMarker(MarkerOptions().position(location).title(model.name))
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 13.0f))
+
+            val lineOptions = PolylineOptions()
+                .color(Color.RED)
+                .width(5f)
+                .clickable(true)
+
+            if (points != null) {
+                for (point in points) {
+                    lineOptions.add(point)
+                }
+            }
+
+            googleMap.addPolyline(lineOptions)
+
+            //googleMap.addMarker(MarkerOptions().position(location).title(model.name))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12.0f))
         }
 
         //foto
         var path = model.path
         if (path == "")
             path = model.kindOfActivity.toString().lowercase() + ".png"
-
-        /**En cas de insertar image*/
-        /*
-        Picasso
-            .get()
-            .load("https://firebasestorage.googleapis.com/v0/b/shelted-d5576.appspot.com/o/${path}?alt=media&token=f95e312c-97ac-468c-a281-5f0eea32b5a7")
-            .resize(1000, 1000)
-            .centerCrop()
-            .into(holder.itemImage)
-
-         */
 
         holder.itemView.setOnClickListener(object: View.OnClickListener {
             override fun onClick(v: View?) {
@@ -148,39 +152,9 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
                 //bundle.putString("kindOfActivity", model.kindOfActivity)
                 bundle.putString("location", model.location)
                 bundle.putString("description", model.description)
-
-                //Future implementation: Cambiar al fragment post al pulsar en un post
-
-                /*val activity=v!!.context as AppCompatActivity
-                val postFragment = postFragment()
-                postFragment.arguments = bundle
-                val fragmentManager: FragmentManager = activity.supportFragmentManager
-                val transaction = fragmentManager.beginTransaction()
-                transaction.replace(R.id.logged_activity,postFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()*/
             }
         })
 
-
-        //Future implementation: favourites
-        /*val states = arrayOf(
-            intArrayOf(android.R.attr.state_checked),
-            intArrayOf(-android.R.attr.state_checked))
-
-        val colors = intArrayOf(
-            Color.parseColor("#FFFF00"),
-            Color.parseColor("#FFFFFF"))
-
-        holder.checkBoxFavourite.buttonTintList = ColorStateList(states, colors)
-
-        holder.checkBoxFavourite.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-
-            }
-            else {
-
-            }*/
     }
 
 
@@ -199,40 +173,5 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
         var mapView: MapView = itemView.findViewById(R.id.mapView)
 
         /**Image**///var itemImage = itemView.item_image
-
-        //var checkBoxFavourite = itemView.checkBox_Favourite   //Future implementation
     }
-
-
-
-    /*override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
-
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.card_layout, parent, false)
-        return ViewHolder(v)
-    }
-
-    override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
-        holder.itemTitle.text = titles[position]
-        holder.itemLocation.text = locations[position]
-        holder.itemDescription.text = descriptions[position]
-        holder.itemImage.setImageResource(images[position])
-    }
-
-    override fun getItemCount(): Int {
-        return titles.size
-    }
-
-    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        var itemImage: ImageView
-        var itemTitle: TextView
-        var itemLocation: TextView
-        var itemDescription: TextView
-
-        init {
-            itemImage = itemView.findViewById(R.id.item_image)
-            itemTitle = itemView.findViewById(R.id.item_title)
-            itemLocation = itemView.findViewById(R.id.item_location)
-            itemDescription = itemView.findViewById(R.id.item_description)
-        }
-    }*/
 }

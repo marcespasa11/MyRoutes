@@ -63,8 +63,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     val sharedViewModel: SharedViewModel by activityViewModels()
 
     val routePost: Post = Post()
-    /**Linea de punts a firebase**///val myRouteLine = hashMapOf<Int, List<LatLng>>()
-    /**Linea de punts a firebase**///val routeLine = hashMapOf<String, List<LatLng>>()
+    /**Linea de punts a firebase**/val myRouteLine = hashMapOf<Int, List<LatLng>>()
+    /**Linea de punts a firebase**/val routeLine = hashMapOf<String, List<LatLng>>()
     var totalDistance: Double = 0.0
     var totalDuration: Double = 0.0
 
@@ -99,7 +99,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             routePost.distance = totalDistance.toString()
             routePost.duration = totalDuration.toString()
             /**Linea de punts a firebase**///routeLine.putAll(myRouteLine.mapKeys { it.key.toString() })
-            /**Linea de punts a firebase**///routePost.routeLine = this.routeLine
+            /**Linea de punts a firebase**/routePost.routeLine = this.myRouteLine.toString()
             sharedViewModel.selectedPlace.value = routePost
         }
 
@@ -134,13 +134,13 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     fun drawRoute(rutePoints: ArrayList<LatLng>, googleMap: GoogleMap) {
         val origin = "${rutePoints.first().latitude},${rutePoints.first().longitude}"
         val destination = "${rutePoints.last().latitude},${rutePoints.last().longitude}"
-        val waypoints = rutePoints.subList(1, rutePoints.size - 1).joinToString("|") { "${it.latitude},${it.longitude}" }
+        val waypoints = rutePoints.subList(1, rutePoints.size - 1).joinToString("|") { "via:${it.latitude},${it.longitude}" }
         val optimizedWaypoints = "optimize:true|$waypoints"
 
         apiService.getDirections(origin, destination, optimizedWaypoints,"walking", MAPS_API_KEY, ).enqueue(object : Callback<DirectionsResponse> {
             override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
                 if (response.isSuccessful) {
-                    /**Linea de punts a firebase**/// var lineCounter = 0
+                    /**Linea de punts a firebase**/var lineCounter = 0
                     for (leg in response.body()?.routes?.firstOrNull()?.legs ?: emptyList()) {
                         val points = leg.steps
                             ?.flatMap { PolyUtil.decode(it.polyline?.points) }
@@ -150,7 +150,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         totalDistance += leg.distance?.value!!.toDouble()
                         totalDuration += leg.duration?.value!!.toDouble()
 
-                        /**Linea de punts a firebase**///myRouteLine[lineCounter] = points //añade los puntos a routeLine
+                        /**Linea de punts a firebase**/myRouteLine[lineCounter] = points //añade los puntos a routeLine
 
                         val lineOptions = PolylineOptions()
                             .color(Color.RED)
@@ -162,7 +162,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         }
 
                         googleMap.addPolyline(lineOptions)
-                        /**Linea de punts a firebase**///lineCounter++
+                        /**Linea de punts a firebase**/lineCounter++
                     }
                 } else {
                     // manejar error
