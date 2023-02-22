@@ -2,23 +2,27 @@ package com.maresgon.myroutes
 
 //import com.maresgon.myroutes.R.layout.card_layout
 
+import android.app.Application
 import com.maresgon.myroutes.R.layout.card_layout
 //C:\Users\Marc\Desktop\Uni Wroclaw\TFG\app\src\main\res\layout\card_layout.xml
 //card_layout.view.*
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.maresgon.myroutes.Classes.Post
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.card_layout.view.*
-
 
 
 class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
@@ -37,11 +41,17 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
      */
     lateinit var parent: ViewGroup
     val db = FirebaseFirestore.getInstance()
+    private lateinit var googleMap: GoogleMap
+    private lateinit var mapView : MapView
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostAdapterVH {
+
         return PostAdapterVH(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.card_layout, parent, false)
+
         )
     }
 
@@ -50,6 +60,7 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
         position: Int,
         model: Post
     ) {
+        val ETSInf = LatLng(39.4822022, -0.3482144)
         holder.itemTitle.text = model.name
         holder.itemDescription.text = model.description
         holder.itemLocation.text = model.location //"${model.city}, ${model.country}"
@@ -102,6 +113,15 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
                 val documentId = snapshots.getSnapshot(holder.adapterPosition).id
                 db.collection("posts").document(documentId).update("liked", false)
             }
+        }
+
+        holder.mapView.onCreate(null)
+        holder.mapView.onResume()
+        holder.mapView.getMapAsync { googleMap ->
+            this.googleMap = googleMap
+            val location = ETSInf
+            googleMap.addMarker(MarkerOptions().position(location).title(model.name))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 13.0f))
         }
 
         //foto
@@ -176,6 +196,8 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
         var itemAccesibility = itemView.imageAccesibility
         var itemTextAccesibility = itemView.item_accesibility
         var itemLikeButton = itemView.item_likeButton
+        var mapView: MapView = itemView.findViewById(R.id.mapView)
+
         /**Image**///var itemImage = itemView.item_image
 
         //var checkBoxFavourite = itemView.checkBox_Favourite   //Future implementation
