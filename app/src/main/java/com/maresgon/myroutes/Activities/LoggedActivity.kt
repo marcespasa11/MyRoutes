@@ -33,6 +33,11 @@ class LoggedActivity : AppCompatActivity() {
 
         setCurrentFragment(firstFragment)
 
+        val intent = intent
+        // receive the value by getStringExtra() method and
+        // key must be same which is send by first activity
+        val str = intent.getStringExtra("edad")
+        println(str)
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {

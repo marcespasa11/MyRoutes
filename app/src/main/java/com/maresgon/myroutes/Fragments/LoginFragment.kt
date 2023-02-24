@@ -1,9 +1,9 @@
 package com.maresgon.myroutes.Fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +11,12 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.maresgon.myroutes.Activities.LoggedActivity
 import com.maresgon.myroutes.R
-import com.maresgon.myroutes.databinding.FragmentLoginBinding
+
 
 //import com.maresgon.myroutes.databinding.FragmentFirstBinding
 
@@ -53,7 +54,10 @@ class LoginFragment : Fragment() {
                 auth.signInWithEmailAndPassword(txt_email, txt_password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(activity, "Logged-in successful!", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(activity, LoggedActivity::class.java))
+                        val intent = Intent(activity, LoggedActivity::class.java)
+                        //Passar info//intent.putExtra("usuari", txt_email)
+                        startActivity(intent)
+                        //startActivity(Intent(activity, LoggedActivity::class.java))
                     } else {
                         Toast.makeText(activity,
                             "Your email or password doesn't exist!",
