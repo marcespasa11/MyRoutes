@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="activityOptions">
+        <item>"---"</item>
         <item>"Walking"</item>
         <item>"Running"</item>
         <item>"Cycling"</item>
     </string-array>
     <string-array name="difficultyOptions">
-        <item>"Hard"</item>
-        <item>"Medium"</item>
+        <item>"---"</item>
         <item>"Easy"</item>
+        <item>"Medium"</item>
+        <item>"Hard"</item>
     </string-array>
 </resources>
