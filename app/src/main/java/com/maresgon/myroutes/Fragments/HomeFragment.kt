@@ -14,13 +14,12 @@ import com.maresgon.myroutes.Classes.Post
 import com.maresgon.myroutes.R
 import com.maresgon.myroutes.RecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.android.gms.maps.OnMapReadyCallback
-import kotlinx.android.synthetic.main.fragment_logged.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class LoggedFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     //private var _binding: FragmentFirstBinding? = null
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -38,7 +37,7 @@ class LoggedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreate(savedInstanceState)
-        val v: View = inflater.inflate(R.layout.fragment_logged, container, false)
+        val v: View = inflater.inflate(R.layout.fragment_home, container, false)
 
 
 

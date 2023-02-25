@@ -6,8 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.maresgon.myroutes.Classes.Post
-import com.maresgon.myroutes.Fragments.LoggedFragment
-import com.maresgon.myroutes.Fragments.PublishFragment
+import com.maresgon.myroutes.Fragments.HomeFragment
 import com.maresgon.myroutes.Fragments.MapFragment
 import com.maresgon.myroutes.Fragments.ProfileFragment
 
@@ -26,7 +25,7 @@ class LoggedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_logged)
 
-        val firstFragment = LoggedFragment()
+        val firstFragment = HomeFragment()
         val secondFragment = MapFragment()
         //val thirdFragment = MapFragment()
         val thirdFragment= ProfileFragment()

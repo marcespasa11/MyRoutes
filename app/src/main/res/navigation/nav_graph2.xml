@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/LoggedFragment"
-        android:name="com.maresgon.myroutes.Fragments.LoggedFragment"
+        android:name="com.maresgon.myroutes.Fragments.HomeFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_logged"/>
+        tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/PublishFragment"
         android:name="com.maresgon.myroutes.Fragments.PublishFragment"

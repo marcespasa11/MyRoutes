@@ -1,20 +1,13 @@
 package com.maresgon.myroutes.Activities
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import androidx.fragment.app.Fragment
-import com.maresgon.myroutes.Fragments.LoggedFragment
-import com.maresgon.myroutes.Fragments.PublishFragment
 import com.maresgon.myroutes.R
 import com.maresgon.myroutes.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_logged.*
 
 class MainActivity : AppCompatActivity() {
 
