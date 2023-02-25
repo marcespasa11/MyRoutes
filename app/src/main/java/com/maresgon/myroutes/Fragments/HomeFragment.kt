@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.*
 /*import com.google.firebase.firestore.CollectionReference
@@ -18,54 +19,55 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
- */
-class HomeFragment : Fragment() {
+ */class HomeFragment : Fragment() {
 
-    //private var _binding: FragmentFirstBinding? = null
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val collectionReference : CollectionReference = db.collection("posts")
-    var recyclerAdapter: RecyclerAdapter ?= null
-    //private var layoutManager: RecyclerView.LayoutManager? = null
-    //private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    //private val binding get() = _binding!!
+    private val collectionReference: CollectionReference = db.collection("posts")
+    private var recyclerAdapter: RecyclerAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        super.onCreate(savedInstanceState)
         val v: View = inflater.inflate(R.layout.fragment_home, container, false)
 
+        val button_filters: TextView = v.findViewById(R.id.button_filters)
+
+        button_filters.setOnClickListener {
+            var filtered_query : Query //= FirebaseFirestore.getInstance().collection("posts").whereEqualTo("difficulty", "Medium")
+
+            var filter_diff = filter_difficulty.selectedItem.toString()
+            var filter_act = filter_kindOfAct.selectedItem.toString()
+            filtered_query = db.collection("posts")
+                .whereEqualTo("difficulty", filter_diff)
+                .whereEqualTo("kindOfActivity", filter_act)
 
 
-        return v //binding.root
+            // Actualiza las opciones del adaptador con la nueva consulta
+            val options = FirestoreRecyclerOptions.Builder<Post>()
+                .setQuery(filtered_query, Post::class.java)
+                .build()
 
+            if (recyclerAdapter != null && recyclerAdapter!!.itemCount > 0) {
+                recyclerAdapter!!.snapshots.clear()//snapshot.documents.clear()
+                recyclerAdapter!!.notifyDataSetChanged()
+            }
+            recyclerAdapter!!.updateOptions(options)
+        }
+
+        return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
-
-        //RecyclerView en local
-        /*val routesRecyclerView = ViewBindings.findChildViewById<RecyclerView>(view, R.id.recyclerView)
-        routesRecyclerView.apply {
-
-            layoutManager = LinearLayoutManager(requireContext())
-            routesRecyclerView?.layoutManager
-            adapter = RecyclerAdapter()
-            routesRecyclerView?.adapter = adapter
-        }*/
-
     }
 
-    private fun setUpRecyclerView(){
-        val query : Query = collectionReference
-        val firestoreRecyclerOptions: FirestoreRecyclerOptions<Post> = FirestoreRecyclerOptions.Builder<Post>()
-            .setQuery(query, Post::class.java)
-            .build()
+    private fun setUpRecyclerView() {
+        val firestoreRecyclerOptions: FirestoreRecyclerOptions<Post> =
+            FirestoreRecyclerOptions.Builder<Post>()
+                .setQuery(collectionReference, Post::class.java)
+                .build()
 
         recyclerAdapter = RecyclerAdapter(firestoreRecyclerOptions)
 
@@ -75,16 +77,11 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        recyclerAdapter!!.startListening()
+        recyclerAdapter?.startListening()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        recyclerAdapter!!.stopListening()
+        recyclerAdapter?.stopListening()
     }
-
-    /*override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }*/
 }
