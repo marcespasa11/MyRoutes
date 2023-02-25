@@ -9,6 +9,7 @@ import com.maresgon.myroutes.Classes.Post
 import com.maresgon.myroutes.Fragments.LoggedFragment
 import com.maresgon.myroutes.Fragments.PublishFragment
 import com.maresgon.myroutes.Fragments.MapFragment
+import com.maresgon.myroutes.Fragments.ProfileFragment
 
 import com.maresgon.myroutes.R
 import kotlinx.android.synthetic.main.activity_logged.*
@@ -27,11 +28,16 @@ class LoggedActivity : AppCompatActivity() {
 
         val firstFragment = LoggedFragment()
         val secondFragment = MapFragment()
-        val thirdFragment = MapFragment()
-        //val thirdFragment=ProfileFragment()
+        //val thirdFragment = MapFragment()
+        val thirdFragment= ProfileFragment()
 
         setCurrentFragment(firstFragment)
 
+        val intent = intent
+        // receive the value by getStringExtra() method and
+        // key must be same which is send by first activity
+        val str = intent.getStringExtra("edad")
+        println(str)
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {

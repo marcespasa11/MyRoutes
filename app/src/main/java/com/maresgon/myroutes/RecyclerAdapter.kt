@@ -120,7 +120,7 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
         holder.mapView.onResume()
         holder.mapView.getMapAsync { googleMap ->
             this.googleMap = googleMap
-            val location = ETSInf
+            var location = ETSInf
 
             val lineOptions = PolylineOptions()
                 .color(Color.RED)
@@ -130,13 +130,14 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
             if (points != null) {
                 for (point in points) {
                     lineOptions.add(point)
+                    location = point
                 }
             }
 
             googleMap.addPolyline(lineOptions)
 
             //googleMap.addMarker(MarkerOptions().position(location).title(model.name))
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12.0f))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12.5f))
         }
 
         //foto

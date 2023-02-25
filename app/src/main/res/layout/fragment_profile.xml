@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B7FFC9"
+    tools:context=".Fragments.ProfileFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="Nombre:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/profile_email"
+            app:layout_constraintEnd_toStartOf="@+id/item_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_toRightOf="@id/profile_name"
+            android:text="Juan Pérez"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/item_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/profile_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_name"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:text="Email:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/profile_birth"
+            app:layout_constraintEnd_toStartOf="@+id/item_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_name" />
+
+        <TextView
+            android:id="@+id/item_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_name"
+            android:layout_marginEnd="40dp"
+            android:layout_toRightOf="@id/profile_email"
+            android:text="juan.perez@gmail.com"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/item_birth"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_email"
+            app:layout_constraintTop_toBottomOf="@+id/item_name" />
+
+        <TextView
+            android:id="@+id/profile_birth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_email"
+            android:layout_marginStart="40dp"
+            android:text="Fecha de nacimiento:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/item_birth"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_email" />
+
+        <TextView
+            android:id="@+id/item_birth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_email"
+            android:layout_marginEnd="40dp"
+            android:layout_toRightOf="@id/profile_birth"
+            android:text="01/01/1990"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_birth"
+            app:layout_constraintTop_toBottomOf="@+id/item_email" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
