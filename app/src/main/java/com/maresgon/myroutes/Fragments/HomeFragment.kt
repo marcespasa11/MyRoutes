@@ -34,13 +34,24 @@ import kotlinx.android.synthetic.main.fragment_home.*
         val button_filters: TextView = v.findViewById(R.id.button_filters)
 
         button_filters.setOnClickListener {
-            var filtered_query : Query //= FirebaseFirestore.getInstance().collection("posts").whereEqualTo("difficulty", "Medium")
+            val filtered_query : Query //= FirebaseFirestore.getInstance().collection("posts").whereEqualTo("difficulty", "Medium")
 
-            var filter_diff = filter_difficulty.selectedItem.toString()
-            var filter_act = filter_kindOfAct.selectedItem.toString()
-            filtered_query = db.collection("posts")
-                .whereEqualTo("difficulty", filter_diff)
-                .whereEqualTo("kindOfActivity", filter_act)
+            val filter_diff = filter_difficulty.selectedItem.toString()
+            val filter_act = filter_kindOfAct.selectedItem.toString()
+
+            filtered_query = if (filter_diff == "---" && filter_act == "---") {
+                db.collection("posts")
+            }else if (filter_diff == "---") {
+                db.collection("posts")
+                    .whereEqualTo("kindOfActivity", filter_act)
+            } else if (filter_act == "---") {
+                db.collection("posts")
+                    .whereEqualTo("difficulty", filter_diff)
+            } else{
+                db.collection("posts")
+                    .whereEqualTo("difficulty", filter_diff)
+                    .whereEqualTo("kindOfActivity", filter_act)
+            }
 
 
             // Actualiza las opciones del adaptador con la nueva consulta
