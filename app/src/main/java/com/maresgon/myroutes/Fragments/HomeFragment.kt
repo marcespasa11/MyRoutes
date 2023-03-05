@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.*
 /*import com.google.firebase.firestore.CollectionReference
@@ -31,7 +32,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_home, container, false)
 
-        val button_filters: TextView = v.findViewById(R.id.button_filters)
+        val button_filters: AppCompatImageButton = v.findViewById(R.id.button_filters)
 
         button_filters.setOnClickListener {
             val filtered_query : Query //= FirebaseFirestore.getInstance().collection("posts").whereEqualTo("difficulty", "Medium")
