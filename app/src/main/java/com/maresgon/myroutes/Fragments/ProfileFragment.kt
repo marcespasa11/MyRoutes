@@ -39,8 +39,8 @@ class ProfileFragment : Fragment() {
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        v.findViewById<TextView>(R.id.item_name).text = localUser.name.toString()
-        v.findViewById<TextView>(R.id.item_email).text = localUser.email.toString()
+        //v.findViewById<TextView>(R.id.item_name).text = localUser.name.toString()
+        //v.findViewById<TextView>(R.id.item_email).text = localUser.email.toString()
         return v
     }
 

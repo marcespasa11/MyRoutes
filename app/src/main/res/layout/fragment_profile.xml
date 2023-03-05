@@ -22,7 +22,7 @@
             app:layout_constraintBottom_toTopOf="@+id/profile_email"
             app:layout_constraintEnd_toStartOf="@+id/item_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/imageView3" />
 
         <TextView
             android:id="@+id/item_name"
@@ -30,12 +30,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
             android:layout_toRightOf="@id/profile_name"
-            android:text="Juan Pérez"
+            android:text="Marc Espasa"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/item_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/profile_name"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/imageView3" />
 
         <TextView
             android:id="@+id/profile_email"
@@ -43,7 +43,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/profile_name"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:text="Email:"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -59,8 +58,8 @@
             android:layout_below="@id/item_name"
             android:layout_marginEnd="40dp"
             android:layout_toRightOf="@id/profile_email"
-            android:text="juan.perez@gmail.com"
-            android:textSize="18sp"
+            android:text="marcesp@gmail.com"
+            android:textSize="17sp"
             app:layout_constraintBottom_toTopOf="@+id/item_birth"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/profile_email"
@@ -72,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/profile_email"
             android:layout_marginStart="40dp"
-            android:text="Fecha de nacimiento:"
+            android:text="Birth Date:"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -87,12 +86,22 @@
             android:layout_below="@id/item_email"
             android:layout_marginEnd="40dp"
             android:layout_toRightOf="@id/profile_birth"
-            android:text="01/01/1990"
+            android:text="11/04/2000"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/profile_birth"
             app:layout_constraintTop_toBottomOf="@+id/item_email" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="217dp"
+            android:layout_height="199dp"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toTopOf="@+id/profile_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

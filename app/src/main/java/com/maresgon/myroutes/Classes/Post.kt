@@ -19,6 +19,6 @@ class Post {
     var accesibility:Boolean ?= false
     var liked:Boolean ?= false
     var path: String ?= null
-    /**Linea de punts a firebase**/var routeLine: String ?= null//HashMap<String, List<LatLng>>? = null
+    var routeLine: String ?= null//HashMap<String, List<LatLng>>? = null
     var user: String ?= null
 }
