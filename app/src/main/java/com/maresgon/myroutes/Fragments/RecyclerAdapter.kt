@@ -1,9 +1,7 @@
-package com.maresgon.myroutes
+package com.maresgon.myroutes.Fragments
 
 import android.graphics.Color
-import android.graphics.PointF.length
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +10,10 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.maresgon.myroutes.Classes.Post
-import com.squareup.picasso.Picasso
+import com.maresgon.myroutes.R
 import kotlinx.android.synthetic.main.card_layout.view.*
 
 
@@ -55,7 +52,7 @@ class RecyclerAdapter (options: FirestoreRecyclerOptions<Post>) :
     }
 
     override fun onBindViewHolder(
-        holder: RecyclerAdapter.PostAdapterVH,
+        holder: PostAdapterVH,
         position: Int,
         model: Post
     ) {
