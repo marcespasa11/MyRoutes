@@ -1,6 +1,5 @@
 package com.maresgon.myroutes.Fragments
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -56,6 +55,12 @@ class LoginFragment : Fragment() {
                         Toast.makeText(activity, "Logged-in successful!", Toast.LENGTH_SHORT).show()
                         val intent = Intent(activity, LoggedActivity::class.java)
                         //Passar info//intent.putExtra("usuari", txt_email)
+                        val user = auth.currentUser?.displayName
+                        if (user != null) {
+                            CurrentSession.login(txt_email, user, "11/04/2000" )
+                        } else {
+                            CurrentSession.login(txt_email, "Marc Espasa", "11/04/2000" )
+                        }
                         startActivity(intent)
                         //startActivity(Intent(activity, LoggedActivity::class.java))
                     } else {

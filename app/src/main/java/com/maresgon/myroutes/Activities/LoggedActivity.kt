@@ -1,8 +1,10 @@
 package com.maresgon.myroutes.Activities
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.maresgon.myroutes.Classes.Post
@@ -25,8 +27,10 @@ class LoggedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_logged)
 
+        val sharedViewModel: SharedViewModel by viewModels()
+
         val firstFragment = HomeFragment()
-        val secondFragment = MapFragment()
+        val secondFragment = MapFragment(sharedViewModel)
         //val thirdFragment = MapFragment()
         val thirdFragment= ProfileFragment()
 

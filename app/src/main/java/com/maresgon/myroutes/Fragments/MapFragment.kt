@@ -58,9 +58,9 @@ internal class MapRendererOptInApplication : Application(), OnMapsSdkInitialized
     }
 }
 
-class MapFragment : Fragment(), OnMapReadyCallback {
+class MapFragment(val sharedViewModel: SharedViewModel) : Fragment(), OnMapReadyCallback {
 
-    val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     val routePost: Post = Post()
     /**Linea de punts a firebase**/val myRouteLine = hashMapOf<Int, List<LatLng>>()

@@ -28,7 +28,7 @@
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_upload_foreground" />
+        app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
 
     <Spinner
         android:id="@+id/filter_kindOfAct"

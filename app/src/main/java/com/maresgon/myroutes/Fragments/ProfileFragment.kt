@@ -6,11 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.maresgon.myroutes.Classes.User
 import com.maresgon.myroutes.R
 
@@ -23,7 +18,7 @@ class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    val localUser: User = User()
+    val localUser: User = User(CurrentSession.getUserId())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +34,9 @@ class ProfileFragment : Fragment() {
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        //v.findViewById<TextView>(R.id.item_name).text = localUser.name.toString()
-        //v.findViewById<TextView>(R.id.item_email).text = localUser.email.toString()
+        v.findViewById<TextView>(R.id.item_name).text = CurrentSession.getUserName()//localUser.name.toString()
+        v.findViewById<TextView>(R.id.item_email).text = localUser.email.toString()
+        v.findViewById<TextView>(R.id.item_birth).text = CurrentSession.getUserBirth()//localUser.birth.toString()
         return v
     }
 

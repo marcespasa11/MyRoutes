@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
         val button_filters: AppCompatImageButton = v.findViewById(R.id.button_filters)
 
         button_filters.setOnClickListener {
-            val filtered_query : Query //= FirebaseFirestore.getInstance().collection("posts").whereEqualTo("difficulty", "Medium")
+            val filtered_query : Query
 
             val filter_diff = filter_difficulty.selectedItem.toString()
             val filter_act = filter_kindOfAct.selectedItem.toString()
