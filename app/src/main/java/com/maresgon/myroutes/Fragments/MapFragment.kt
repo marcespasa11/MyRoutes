@@ -59,7 +59,7 @@ internal class MapRendererOptInApplication : Application(), OnMapsSdkInitialized
 }
 
 class MapFragment(
-    val sharedViewModel: SharedViewModel,
+    private val sharedViewModel: SharedViewModel,
     directionsApiService: Class<DirectionsApiService>,
     retrofit: Retrofit
 ) : Fragment(), OnMapReadyCallback {
