@@ -1,14 +1,25 @@
 package com.maresgon.myroutes.Fragments
 
-object CurrentSession {
+class CurrentSession private constructor() {
     private var userId: String? = null
     private var userName: String? = null
     private var userBirth: String? = null
 
+    companion object {
+        private var instance: CurrentSession? = null
+
+        fun getInstance(): CurrentSession {
+            if (instance == null) {
+                instance = CurrentSession()
+            }
+            return instance as CurrentSession
+        }
+    }
+
     fun login(userId: String, userName: String, userBirth: String) {
-        CurrentSession.userId = userId
-        CurrentSession.userName = userName
-        CurrentSession.userBirth = userBirth
+        this.userId = userId
+        this.userName = userName
+        this.userBirth = userBirth
     }
 
     fun getUserId(): String? {

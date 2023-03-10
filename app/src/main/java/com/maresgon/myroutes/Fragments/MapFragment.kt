@@ -58,7 +58,11 @@ internal class MapRendererOptInApplication : Application(), OnMapsSdkInitialized
     }
 }
 
-class MapFragment(val sharedViewModel: SharedViewModel) : Fragment(), OnMapReadyCallback {
+class MapFragment(
+    val sharedViewModel: SharedViewModel,
+    directionsApiService: Class<DirectionsApiService>,
+    retrofit: Retrofit
+) : Fragment(), OnMapReadyCallback {
 
 
 
@@ -69,12 +73,9 @@ class MapFragment(val sharedViewModel: SharedViewModel) : Fragment(), OnMapReady
     var totalDuration: Double = 0.0
 
 
-    val retrofit = Retrofit.Builder()
-        .baseUrl("https://maps.googleapis.com/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
 
-    val apiService = retrofit.create(DirectionsApiService::class.java)
+
+    val apiService = retrofit.create(directionsApiService)//DirectionsApiService::class.java)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

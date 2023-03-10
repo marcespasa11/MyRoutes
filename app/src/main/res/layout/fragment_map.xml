@@ -14,7 +14,7 @@
         map:uiZoomControls="true"
         map:uiRotateGestures="true"
         map:cameraTilt="30"
-        map:cameraZoom="17"
+        map:cameraZoom="16"
         />
     <Button
         android:id="@+id/button_drawRoute"

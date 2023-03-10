@@ -18,7 +18,8 @@ class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    val localUser: User = User(CurrentSession.getUserId())
+    val thisSession = CurrentSession.getInstance()
+    val localUser: User = User(thisSession.getUserId())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +35,9 @@ class ProfileFragment : Fragment() {
     ): View? {
         val v: View = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        v.findViewById<TextView>(R.id.item_name).text = CurrentSession.getUserName()//localUser.name.toString()
+        v.findViewById<TextView>(R.id.item_name).text = thisSession.getUserName()//localUser.name.toString()
         v.findViewById<TextView>(R.id.item_email).text = localUser.email.toString()
-        v.findViewById<TextView>(R.id.item_birth).text = CurrentSession.getUserBirth()//localUser.birth.toString()
+        v.findViewById<TextView>(R.id.item_birth).text = thisSession.getUserBirth()//localUser.birth.toString()
         return v
     }
 

@@ -41,6 +41,7 @@ class LoginFragment : Fragment() {
         val regButton: TextView = v.findViewById(R.id.button_regFragment)
         val email: EditText = v.findViewById(R.id.email_field)
         val password: EditText = v.findViewById(R.id.password_field)
+        val thisSession = CurrentSession.getInstance()
 
         // Replace activity
         logButton.setOnClickListener {
@@ -57,9 +58,9 @@ class LoginFragment : Fragment() {
                         //Passar info//intent.putExtra("usuari", txt_email)
                         val user = auth.currentUser?.displayName
                         if (user != null) {
-                            CurrentSession.login(txt_email, user, "11/04/2000" )
+                            thisSession.login(txt_email, user, "11/04/2000" )
                         } else {
-                            CurrentSession.login(txt_email, "Marc Espasa", "11/04/2000" )
+                            thisSession.login(txt_email, "Marc Espasa", "11/04/2000" )
                         }
                         startActivity(intent)
                         //startActivity(Intent(activity, LoggedActivity::class.java))

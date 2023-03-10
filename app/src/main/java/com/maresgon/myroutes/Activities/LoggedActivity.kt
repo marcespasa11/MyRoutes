@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.maresgon.myroutes.Api_Interface.DirectionsApiService
 import com.maresgon.myroutes.Classes.Post
 import com.maresgon.myroutes.Fragments.HomeFragment
 import com.maresgon.myroutes.Fragments.MapFragment
@@ -14,6 +15,8 @@ import com.maresgon.myroutes.Fragments.ProfileFragment
 
 import com.maresgon.myroutes.R
 import kotlinx.android.synthetic.main.activity_logged.*
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class SharedViewModel: ViewModel() {
@@ -28,10 +31,14 @@ class LoggedActivity : AppCompatActivity() {
         setContentView(R.layout.activity_logged)
 
         val sharedViewModel: SharedViewModel by viewModels()
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://maps.googleapis.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val directionsApiService = DirectionsApiService::class.java
 
         val firstFragment = HomeFragment()
-        val secondFragment = MapFragment(sharedViewModel)
-        //val thirdFragment = MapFragment()
+        val secondFragment = MapFragment(sharedViewModel, directionsApiService, retrofit)
         val thirdFragment= ProfileFragment()
 
         setCurrentFragment(firstFragment)
